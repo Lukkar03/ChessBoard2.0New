@@ -1,26 +1,39 @@
-﻿using System;
-
+﻿
 namespace ChessBoardNew
 {
     internal class Program
     {
-        static void Main()
+        static void Main(string[] args)
         {
-            Console.Write("Hur stort schackbräde vill du ha? (3-50): ");
-            if (int.TryParse(Console.ReadLine(), out int size) && size >= 3 && size <= 50)
+            int size = ReadSize();
+            RenderBoard(size);
+        }
+
+        static int ReadSize()
+        {
+            int n;
+            while (true)
             {
-                for (int row = 0; row < size; row++)
+                Console.WriteLine("Hur stort schackbräde vill du ha? (3-50)");
+                string input = Console.ReadLine();
+                if (int.TryParse(input, out n) && n >= 3 && n <= 50)
                 {
-                    for (int col = 0; col < size; col++)
-                    {
-                        Console.Write((row + col) % 2 == 0 ? "X" : "O");
-                    }
-                    Console.WriteLine();
+                    return n;
                 }
+                Console.WriteLine("Ogiltigt storlek. Ange ett heltal mellan 3 och 50.");
             }
-            else
+        }
+
+        static void RenderBoard(int size)
+        {
+            for (int row = 0; row < size; row++)
             {
-                Console.WriteLine("Ogiltig inmatning. Ange ett heltal mellan 3 och 50.");
+                for (int col = 0; col < size; col++)
+                {
+                    Console.Write((row + col) % 2 == 0 ? "X" : "O");
+                }
+                Console.WriteLine();
+
             }
         }
     }
